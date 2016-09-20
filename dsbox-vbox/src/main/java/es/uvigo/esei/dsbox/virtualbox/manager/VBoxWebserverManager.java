@@ -85,12 +85,12 @@ public class VBoxWebserverManager {
         try {
             runningProcess = processBuilder.start();
         } catch (IOException ex) {
-            throw new VMDriverException("Error starting VirtualBox web server (host: " + this.hostname + " port: " + this.port + ")", ex);
+            throw new VMDriverException("Error trying to start VirtualBox web server (host: " + this.hostname + " port: " + this.port + ")", ex);
         }
         int i = 0;
-        while ((i < 3) && (runningProcess != null) && !runningProcess.isAlive()) {
+        while ((i < 8) && (runningProcess != null) && !runningProcess.isAlive()) {
             try {
-                Thread.sleep(100L);
+                Thread.sleep(250L);
                 i++;
             } catch (InterruptedException ex) {
                 throw new VMDriverException("VirtualBox web server start (host: " + this.hostname + " port: " + this.port + ") was interrupted ¿?", ex);

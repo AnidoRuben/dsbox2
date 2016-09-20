@@ -89,7 +89,7 @@ public class VirtualBoxDriver implements VMDriver {
             do {
                 // Try to connect again
                 try {
-                    Thread.sleep(100L); // Wait
+                    Thread.sleep(250L); // Wait
                     vboxWebserverConnect(vmDriverSpec.getWebServerHost(), vmDriverSpec.getWebServerPort(), vmDriverSpec.getWebServerUser(), vmDriverSpec.getWebServerPassword());
                     if (connectedToVBoxWebserver) {
                         return; // Conencted -> continue
@@ -99,7 +99,7 @@ public class VirtualBoxDriver implements VMDriver {
                 } catch (InterruptedException ex) {
                     throw new VMDriverException("VirtualBox web server start was interrupted ¿?", ex);
                 }
-            } while (tries < 3);
+            } while (tries < 8);
 
             if (!connectedToVBoxWebserver) {
                 throw new VMDriverException("Unable to connect with VBox webserver at port " + vmDriverSpec.getWebServerPort()

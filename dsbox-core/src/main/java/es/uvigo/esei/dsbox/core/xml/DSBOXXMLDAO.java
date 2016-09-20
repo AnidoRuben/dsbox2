@@ -9,7 +9,7 @@ import es.uvigo.esei.dsbox.core.model.NetworkType;
 import es.uvigo.esei.dsbox.core.model.SimulationSpec;
 import es.uvigo.esei.dsbox.core.model.VMImage;
 import es.uvigo.esei.dsbox.core.model.exceptions.DSBOXException;
-import es.uvigo.esei.dsbox.virtualbox.execution.VirtualBoxDriverSpec;
+//import es.uvigo.esei.dsbox.virtualbox.execution.VirtualBoxDriverSpec;
 import java.io.File;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -27,7 +27,7 @@ public class DSBOXXMLDAO {
     }
 
     public DSBOXXMLDAO(Class[] knownJAXBClasses) {
-        super();
+        this();
         this.addKnownJAXBClasses(knownJAXBClasses);
     }
 
@@ -101,28 +101,28 @@ public class DSBOXXMLDAO {
         }
     }
 
-    public VirtualBoxDriverSpec loadVirtualBoxDriverSpecFromFile(String filename) throws DSBOXException {
-    try {
-            JAXBContext context = JAXBContext.newInstance(VirtualBoxDriverSpec.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            VirtualBoxDriverSpec spec = (VirtualBoxDriverSpec) unmarshaller.unmarshal(new File(filename));
-            return spec;
-        } catch (JAXBException ex) {
-            throw new DSBOXException("Error loading VirtualBoxDriverSpec from " + filename, ex);
-        }
-    }
-    
-    public void saveVirtualBoxDriverSpecFromFile(String filename, VirtualBoxDriverSpec spec) throws DSBOXException {
-        try {
-            JAXBContext context = JAXBContext.newInstance(VirtualBoxDriverSpec.class);
-            Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-            marshaller.marshal(spec, new File(filename));
-        } catch (JAXBException ex) {
-            throw new DSBOXException("Error saving VirtualBoxDriverSpec from " + filename, ex);
-        }
-    }
+//    public VirtualBoxDriverSpec loadVirtualBoxDriverSpecFromFile(String filename) throws DSBOXException {
+//    try {
+//            JAXBContext context = JAXBContext.newInstance(VirtualBoxDriverSpec.class);
+//            Unmarshaller unmarshaller = context.createUnmarshaller();
+//            VirtualBoxDriverSpec spec = (VirtualBoxDriverSpec) unmarshaller.unmarshal(new File(filename));
+//            return spec;
+//        } catch (JAXBException ex) {
+//            throw new DSBOXException("Error loading VirtualBoxDriverSpec from " + filename, ex);
+//        }
+//    }
+//    
+//    public void saveVirtualBoxDriverSpecFromFile(String filename, VirtualBoxDriverSpec spec) throws DSBOXException {
+//        try {
+//            JAXBContext context = JAXBContext.newInstance(VirtualBoxDriverSpec.class);
+//            Marshaller marshaller = context.createMarshaller();
+//            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+//            marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+//            marshaller.marshal(spec, new File(filename));
+//        } catch (JAXBException ex) {
+//            throw new DSBOXException("Error saving VirtualBoxDriverSpec from " + filename, ex);
+//        }
+//    }
     
     public final static void main(String[] args) throws DSBOXException {
         SimulationSpec spec = new SimulationSpec("aaa", "aaaaa", "author");

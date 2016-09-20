@@ -9,8 +9,11 @@
         <module>dsbox-core</module>
         <module>dsbox-gui</module>
         <module>dsbox-cli</module>
+        <module>dsbox-vbox</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 </project>

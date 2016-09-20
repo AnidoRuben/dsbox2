@@ -52,10 +52,19 @@ public class MainController {
         return workingDirectory;
     }
     
-    public void startUp() throws DSBOXException, VMDriverException {//throws DSBOXException, VMDriverException {
+    public void startUp() throws DSBOXException, VMDriverException {
         this.registeredHostTypes = dsboxConfig.getRegisteredHostTypes();
-        
-        vboxDriverSpec = dsboxConfig.getVirtualBoxDriverSpec();
+
+        // Create/load VBox driver Spec
+        File vboxDriverSpecFile = new File(dsboxConfig.getConfigDir(), VirtualBoxDriverSpec.VBOXDRIVER_CONFIG_FILE);
+        if (!vboxDriverSpecFile.exists()) {
+            vboxDriverSpec = VirtualBoxDriverSpec.loadFromFile(vboxDriverSpecFile.getAbsolutePath());
+        }
+        else {
+            vboxDriverSpec = VirtualBoxDriverSpec.createDefaultSpec(dsboxConfig);
+            VirtualBoxDriverSpec.saveToFile(vboxDriverSpec, vboxDriverSpecFile.getAbsolutePath());
+        }
+
         vboxDriver = new VirtualBoxDriver();
         vboxDriver.setVMDriverSpec(vboxDriverSpec);
         
@@ -65,11 +74,13 @@ public class MainController {
         engine.addVMDriver(vboxDriver);
         engine.initialize();
         
+        /* TODO: en simulacion
         for (HostType hostType : registeredHostTypes) {
             if (!engine.isHostTypeRegistered(hostType)) {
                 engine.registerHostType(hostType);
             }
         }
+        */
     }
     
     public void shutDown() throws VMDriverException {
@@ -118,6 +129,10 @@ public class MainController {
     
     public void startSimulation(SimulationSpec simulationSpec) throws VMDriverException {
         String simulationName = simulationSpec.getName();
+        
+        // Check host type are dowloaded and registered in VMDriver
+        // Control download -> cancel download => abort startSimulation
+        
         executionSpec = engine.initSimulation(simulationName, simulationSpec.getNetworkSpec());
         
         engine.startSimulation(simulationName, executionSpec);

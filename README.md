@@ -14,7 +14,7 @@ Editor y simulador de redes de equipos virtualizados.
 1. Clonado del proyecto de GitHub`
 
 ```
-git clone <https://github.com/repossi/dsbox2.git>
+git clone https://github.com/repossi/dsbox2.git
 ```
 
 2. Descargar y descomprimir el SDK de VirtualBox (versión 5.0.x)`

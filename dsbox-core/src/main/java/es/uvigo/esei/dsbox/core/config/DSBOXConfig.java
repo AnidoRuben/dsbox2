@@ -6,8 +6,8 @@ import es.uvigo.esei.dsbox.core.model.OperativeSystemType;
 import es.uvigo.esei.dsbox.core.model.VMImage;
 import es.uvigo.esei.dsbox.core.model.exceptions.DSBOXException;
 import es.uvigo.esei.dsbox.core.xml.DSBOXXMLDAO;
-import es.uvigo.esei.dsbox.virtualbox.execution.VirtualBoxDriverSpec;
-import es.uvigo.esei.dsbox.virtualbox.manager.VirtualBoxDriver;
+//import es.uvigo.esei.dsbox.virtualbox.execution.VirtualBoxDriverSpec;
+//import es.uvigo.esei.dsbox.virtualbox.manager.VirtualBoxDriver;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class DSBOXConfig {
     public final static String CONFIG_DIR = "config";
     public final static String HOST_TYPES_DIR = "hostTypes";
     public final static String DSBOX_PROPERTIES = "dsbox.properties";
-    public final static String VBOXDRIVER_CONFIG = "vboxDriver.xml";
+
 
     private String dsboxHomeDir;
     private DSBOXXMLDAO dao;
@@ -97,7 +97,7 @@ public class DSBOXConfig {
             hostTypesDir.mkdir();
             createDefaultHostType();
             createDefaultDSBOXproperties();
-            createDefaultVirtualBoxDriverSpec();
+//            createDefaultVirtualBoxDriverSpec();
         }
 
     }
@@ -200,21 +200,21 @@ public class DSBOXConfig {
         }
     }
 
-    public VirtualBoxDriverSpec getVirtualBoxDriverSpec() throws DSBOXException {
-        File driverSpecFile = new File(getConfigDir(), VBOXDRIVER_CONFIG);
-        return dao.loadVirtualBoxDriverSpecFromFile(driverSpecFile.getAbsolutePath());
-    }
-
-    public void storeVirtualBoxDriverSpec(VirtualBoxDriverSpec vboxSpec) throws DSBOXException {
-        File driverSpecFile = new File(getConfigDir(), VBOXDRIVER_CONFIG);
-        dao.saveVirtualBoxDriverSpecFromFile(driverSpecFile.getAbsolutePath(), vboxSpec);
-    }
-
-    private void createDefaultVirtualBoxDriverSpec() throws DSBOXException {
-        VirtualBoxDriverSpec defaultSpec = new VirtualBoxDriverSpec();  
-        defaultSpec.setImagesBasePath(getImagesDir().getAbsolutePath());
-        defaultSpec.setSimulationsBasePath(getSimulationsDir().getAbsolutePath());
-        storeVirtualBoxDriverSpec(defaultSpec);
-    }
+//    public VirtualBoxDriverSpec getVirtualBoxDriverSpec() throws DSBOXException {
+//        File driverSpecFile = new File(getConfigDir(), VBOXDRIVER_CONFIG);
+//        return dao.loadVirtualBoxDriverSpecFromFile(driverSpecFile.getAbsolutePath());
+//    }
+//
+//    public void storeVirtualBoxDriverSpec(VirtualBoxDriverSpec vboxSpec) throws DSBOXException {
+//        File driverSpecFile = new File(getConfigDir(), VBOXDRIVER_CONFIG);
+//        dao.saveVirtualBoxDriverSpecFromFile(driverSpecFile.getAbsolutePath(), vboxSpec);
+//    }
+//
+//    private void createDefaultVirtualBoxDriverSpec() throws DSBOXException {
+//        VirtualBoxDriverSpec defaultSpec = new VirtualBoxDriverSpec();  
+//        defaultSpec.setImagesBasePath(getImagesDir().getAbsolutePath());
+//        defaultSpec.setSimulationsBasePath(getSimulationsDir().getAbsolutePath());
+//        storeVirtualBoxDriverSpec(defaultSpec);
+//    }
 
 }
